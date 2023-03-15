@@ -1,0 +1,134 @@
+
+
+sh --------->  ksh ----------->  csh -----------> fish ----------->  tash  --------------->   Bash
+
+Launch an instance  ->  REDHAT  ->  shelloslinux
+
+unset is a command used to  remove the value that set to any variable 
+
+x=pop
+
+echo "iam kanna hello $x"   -  here it prints the value of x 
+
+x=7  
+echo " iam kanna  ${x}th  standard  
+
+to store the output of any command in a variable 
+      var = $(command)
+      ex :  y=$(date)   or  t=~date~
+      
+      
+      
+read -p "enter your name "  n 
+      -  it prompt & store the input in n 
+      
+      
+test command used for comparison operations 
+
+    test  5  -eq  6   ,   test   7  -ge  6    lly   -le  ,  -ne 
+    
+    
+ we can write  multiple commands instantly by separating each with ;
+ 
+    ex:    date ; cal ; ls   -  here the output of one doesnot effect the other 
+    
+            date && cal   -  here cal runs only if the date runs without failure
+            date || cal   -  here cal runs even if the date fails 
+            
+            
+  test  $?  -eq  0  &&   echo "done ok"  ||   echo "errors"   -----------    ternary operation
+  
+  
+  in the same way we can test a file and create only if not exist
+  
+  to run a script file we use 
+  
+        bash <file>
+        
+        
+     in read command -n is used to set the  no.of character  limit  to input
+     
+     
+     from ec2-user
+     
+          cat /etc/shadow    -   doesnot allow to access
+          
+     from root it provide access 
+     
+     test -r /etc/shadow  && echo "go a head " || echo " not allowed "   -  try this command from ec2 user and root 
+     
+     to set a default value for a variable we use 
+     
+          x=${myname: -kanna}   ---  in  a script file    and when we run the file it prompt for input if no value given it takes default and any iput it taked the input value
+          
+          x=${myname: +kanna}   ---  here the empty remains empty and if any value given it overwrite with kanna it consider only kanna as input
+          
+          
+          echo ${y,}  ---  first letter of data in y  changes its case  ie.  U->L  ,  L-> U
+          echo ${y,,} ---  complete word converts to lowercase
+          echo ${x%.*} -- removes everything after the .
+          
+          
+          let z=kanna
+          
+          echo ${z%n%a}   ----- kan
+          echo ${z%a}ss  ------- kannss
+          
+          echo ${y%:*/*/}   --  removes everything after two /'s from :
+          
+          
+          
+      to know the precreated variables we use   see | less    (or)   env    commands 
+      
+      echo  $SHELL  ,    echo  $SHELL_VERSION
+      
+      echo {1..5} -----> 12345
+      touch a{1....10}.txt  -----> creates files   a1.txt,a2.txt ...... 10.txt   
+      echo {10..0}   ->  10 9 8 7 .... 0 
+      echo {10..0..2}   ->  10 8 6 ..0
+      
+      
+      p=$(pwd)/hello.html
+      
+      echo ${p%/*}  - suffix it consider the value from end to start
+      echo ${p%#/*}  - prefix  it consider the value from start to end 
+      
+      t="a1/b1/c1/d1/hi.txt"
+      
+      echo ${t%/*}  -  a1/b1/c1/d1
+      
+      echo ${t%%/*}  -> a1
+      echo ${t##/*} ->a1/b1/c1/d1
+      echo ${#t}  -> count the characters of the retrived word
+      
+      a=(vimal tom pop  kanna)
+      echo $a
+      echo ${a[o]}  , echo ${a[3]}
+      
+      echo ${a[@]}  -> print all data
+      echo ${#a[@]}  count all data
+      
+      
+      
+      vim name.sh
+            
+            name = $1
+            age = $2
+            echo "name is $name  with age $age"
+            
+       bash name.sh  kanna 18
+       
+       we can use   $#  in the statement to count the no.of arguments given 
+       
+       mkdir will not create a directory inside a directory at instant but to create we use -p 
+       
+          mkdir -p a1/b1/c1/d1
+          
+          
+     
+     
+  
+            
+      
+      
+     
