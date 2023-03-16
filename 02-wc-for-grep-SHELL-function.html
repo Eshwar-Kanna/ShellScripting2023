@@ -1,0 +1,222 @@
+
+
+we use pipe |  to use multiple commands and the output of first will be given as input to second
+
+  ex:  echo " welcome "  |  tr a-z  A-Z
+
+wc -c   ----->  count characters    
+wc -l   ----->  count no of lines 
+wc -w   ----->  count no of words 
+
+
+for x in vimal  eric tom pop harry 
+>  do
+> echo $x
+> echo "hello hi "
+> done 
+
+
+In shell scripting instead {}  we use  do at start and done at end 
+
+for x in { 0...6 }  ; do  echo $x  : done 
+
+echo ~expr  5-1 ~    --> gives 4 
+
+echo "vimal: x:h1:111:ok"  | cut -d : -f1
+echo "vimal:x:h1:111:ok"  |  cut -d : -f3,4
+
+id kanna  ->  checks does user kanna exists or not 
+
+for i in ~cat /etc/passwd~
+> do
+> echo $i
+> done
+
+
+cat /etc/passwd  | cut -d : -f1
+
+grep -v linux lw.txt  -> print all lines not having linux 
+grep -v linux lw.txt  and lly -n  to count 
+
+cat /etc/passwd   |  grep bash  |  cut -d : -f1
+grep bash$  /etc/passwd 
+
+
+to create  a function   in shell scripting 
+
+  vim f.sh 
+
+    lw() {
+      
+            date 
+            cal
+        }
+     lw
+
+  bash f.sh
+
+
+  kanna()  {
+
+        name : $1
+        echo " im $name "
+          
+            }
+
+     kanna
+
+    bash  f.sh  eshwar
+
+
+    myuser()  {
+
+        cat /etc/passwd    |  grep   ${1}$   |  cut -d1   : -f1  ;
+        
+        myuser  no-login
+    
+    bash  f.sh
+
+
+  mynettest()   {
+
+      ping  -c  1  www.google.com   &>  /dev/null
+      [ $? == 0 ] && echo " connected "  ||  echo "error " 
+      
+                }
+     mynettest
+
+  bash f.sh
+
+
+when we run a command if its  existing then print output  on screen else it returns to a file to store  output of error  command 
+
+    ex:  date1    &>  n.txt  
+          echo n.txt
+
+
+>   --->  this operation overwrite the file info
+>>  --->  this operation will append the file info
+
+&>>  --->  append error command output info into a file 
+
+
+when we want to use the function of a file we should load the file by 
+        .<filename>     ex :   .file.sh
+ 
+          
+  But when we logout and login again we should load function and file but to automate the loading of file we add it in bashrc 
+          
+          vim  .bashrc 
+              ./root/f.sh
+          
+   in the shell 
+          salary=3
+          
+  if [ $salary   -ge  5 ]
+          > then 
+          > echo "ok"
+          > else
+          > echo "not"
+          > fi
+          
+     fi is the closing syntax for if 
+          
+      the above script gives output  as   not  
+          
+      change salary=7   and run the script it prints   ok 
+          
+          
+          
+          
+      script of installing  a software by mentioning  name  and only if not exist 
+
+vim  /tmp/p.sh
+          
+    MYUID=$(id-u)      
+       if  [ $MYUID   -eq  0 ]
+          
+       then 
+          echo " we can do "
+          read -p  " enter ur package "  pack
+          if rpm  -q  $pack  &>  /dev/null
+          
+          then 
+          
+                tput setaf 6
+          
+                echo "$pack  already  installed "
+                tput setaf  7
+          
+          elif  yum install  $pack  -y  &>  /dev/null
+          
+          then
+              echo " $pack installed successfully "
+              tput setaf  7
+          
+          fi
+          
+     else 
+              echo  " not allowed to install  packages "
+          
+     fi
+          
+          
+     
+          
+ bash  /tmp/p.sh
+          
+          
+   yum install  epel-release in rhel8
+          
+   amazon-linux-extras   install  epel  in  AMI
+          
+   yum install   Shellcheck   -y
+          
+   
+              vim  lw.sh 
+          
+                  x=5
+                  echo $x
+          
+              bash lw.sh
+          
+          
+     shellcheck  lw.sh   -  this will check the code interpreter and the shell using
+          
+          
+         we can able to run the file  only from its path  where it is located   to know the path run command   which <command>
+          
+                ex :   which date   -  gives the path of date where it is located
+                  
+                        echo  $PATH  -  gives all the default path's 
+          
+          to run the script from any folder we should copy the file to  /usr/local/bin
+          
+          
+          but to run the file as command instead      bash  <file>        we should make the file executable   using 
+          
+                  chmod +x  <file>     ex:   chmod  +x  lw.sh
+          
+          then we can run lw.sh instead bash  lw.sh 
+          
+          
+     In a script to tell the interpreter that this script  is of bash we write     #!/usr/bin/bash
+          
+          
+          echo " linux  >] $ world "   ->  it fails 
+          echo " linux  >] $ world '   ->   prints  as it written 
+          
+          
+      we use ''  instead " "  to print statement as it is  lly   \n  for  new line    \t    for  tab space 
+          
+          
+          echo -e  " linux  \033[40m  world "  ->  creates blackbox 
+          echo -e -n " \033[40m \033 [47m \033[40m "   ->  creates black white block box 
+          
+          
+          
+          
+          
+    
+          
+          
