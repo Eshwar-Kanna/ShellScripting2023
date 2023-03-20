@@ -1,0 +1,87 @@
+
+
+grep  bash$  /etc/passwd       --------   this will print the lines in passwd file  which contains bash  at last  
+
+$  is the regex   that   specify  the portion in retrieving 
+
+
+      regex101.com    --->  it is the website  used for  performing  live  regex operations 
+
+
+a.c   -->  to find the word having one character between  a&c 
+a..c  -->  to find the word having any two characters between  a & c 
+
+grep t.m  hello.txt   ----  this print the words starting with  t  and ending with  m  and having any one character between them 
+
+grep -i  ----->    to disable case sensitive  and retrive if the characters  in any case 
+
+a[k-m]c   ----->   retrieve   words  of akm , alc , amc   if had in the file filtering 
+
+a[^0-9]g   ------>  retrive starting with a and ending with  g   and any letter other than 0-9 in between  
+
+ab*c   ------>  abc, ac , abbc, abbbbbc  , etc
+
+ab+c   --->   their should be atleast one b in between 
+
+ab{5}c   ----> exactly  5 b's  in between  a   and   c 
+
+ab{ 2 , 6 } c  --->   abbc , abbbc , abbbbc , abbbbbc  , abbbbbbc 
+
+
+
+
+=>  regex  for filtering numbers  between   1000  to 9999
+
+
+      [1-9][0-9][0-9][0-9]      or      [1-9][0-9]{3}       or     [1-9]\d{3}   (  \d  is to filter any number )
+
+
+
+\d   = [0-9]  is to filter  numbers from the file     
+
+\D  = [ ^0-9 ]  is to filter  other except  numbers [0-9]
+
+\w   = all words  
+
+\W   =  all  special  characters 
+
+any special  characters  convert  into  normal  we use   \  as prefix  
+
+
+/\<tom\>   --->   retrieve word  of tom 
+  
+/\s vimal \s  -->  retrive only if vimal is a separate word   
+  
+/^vimal       ---->  retrieve if the vimal is at the start of  line 
+  
+/vimal$      ----->  retrieve  if the vimal is at the end of line 
+  
+  
+\w*@\w*.\w*    ---->   retrieve if any  word is of form  abc@cde.fgh
+  
+' \w\{1,\}@\w\{1,\}\.\w\{1,\} '    ---> it retrives only if it contains atleast one word at specified place 
+  
+  
+  
+  sed  3d  db2.txt     -----> this will delete the 3rd line in the file 
+  
+  sed  2,6d  db2.txt    ------->  deletes line from 2 to 6 
+  
+  sed s/[Tt][Oo][mM]/eric/    db.txt    ---  here tom & TOM  will be converted  to eric 
+  
+  sed  's/co*m/com/'  db.txt      ------->  here if it has multiple  o's  inputed b/w  cm  it will be converted to com
+  
+  sed -n '/tom/p' db.txt      ----------- >  print lines having  tom , same as grep  and here p is to print 
+  
+  sed -i  's/co\{1,\}m/com/'    db.txt      ------>   without  i  parameter the output will be displayed but will not be updated in the original file to update we use -i
+  
+  
+for multiple  conversions  or substitutions    in single line  we  use  -e  each time  
+  
+  sed  -i  's/^kanna//'    /etc/passwd                 --------->    delete  the  line start with kanna (user)      
+  
+  
+
+
+
+
