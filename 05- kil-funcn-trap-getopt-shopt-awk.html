@@ -1,0 +1,228 @@
+
+
+
+
+
+
+
+
+
+  page=1
+
+ while [ $page -le 5 ]
+    >  do 
+    > echo $page
+    > page=$(( $page + 1 ))
+    > done
+
+
+
+ while [ $page  -le  8 ]
+  > do 
+  > echo " the value of page at instant is  $page "
+  > page=$(( $page + 1 ))
+  > done
+
+
+
+ while ping -c 1 8.8.8.8 > /dev/null
+> do
+> sleep 5
+> echo " iam connected "
+> done
+
+
+
+
+
+while [ $x -le 5 ]
+> do
+> if [ $x -eq 3 ]
+> then
+> break
+> fi
+> echo $x
+> x=$(( $x + 1 ))
+> done
+
+
+
+
+
+while :
+        do
+                echo -n " "
+                sleep 2
+                if ! ping -c 1  8.8.8.8  >  /dev/null
+                then
+
+                        echo " iam down "
+
+                else
+                        echo " iam connected "
+                fi
+        done
+
+
+  
+
+ 
+   getopt "ab" 5 10
+   getopt "xy"  -x  -y
+   getopt  "xy:"  -x  -y=4
+   getopt "xy:z:"  -x  -y=5 -z=9
+   getopt -l  "name: , age: , city: "  -- --name=kanna --age 21 --city  hyd
+   getopt -l "name: , age: , city: "  -o  "n:a:c"  --  --n=kanna --a 21 --c  hyd
+
+
+
+
+
+#!/bin/bash
+
+name="kanna"
+phone=2345
+age=21
+
+myusage() {
+        echo " usage : -p , [ -c  value ] , -n  , -a  "
+}
+
+# read -p "enter your choice :  "   ch
+
+while getopts  "npac:"  ch
+do
+        case  $ch  in
+                n)      echo $name
+                                ;;
+                p)      echo $phone
+                                ;;
+                a)      echo $age
+                                ;;
+                c)      echo $OPTARG
+                                ;;
+                *)
+                        myusage
+                        break
+        esac
+
+done
+
+
+
+  ./myodata.sh  -n
+  ./myodata.sh  -p
+  ./myodata.sh  -a
+  ./myodata.sh  -c
+  ./myodata.sh  -c hyd
+  ./myodata.sh  -c hyd  -a -p -n
+
+
+
+  man shopt
+  shopt -s
+  
+  date | tee  b.txt
+  cat b.txt
+  
+  cat /etc/fstab
+  
+    x=10
+    vim a.sh
+    bash a.sh
+   
+    x= 20 &
+    bash a.sh
+    
+    x=90
+    export x
+    bash a.sh
+    
+1.     (y=10)
+        echo $y
+    
+2 .     x=9
+        (echo $x)
+   
+    { z=4 ; }
+    echo $z
+  
+    here we can get the value of subprocess in the main process as first one but can get the  value of main process in subprocess as second  
+    and we can access the value of subprocess in main process using {}
+
+
+p1.sh
+
+          i=0
+          while  [ $i -le 5 ]
+          do
+                  echo " iam job 1 $i "
+                  i=$(( $i + 1 ))
+                  sleep 1
+          done
+
+
+p2.sh
+
+      i=0
+      while  [ $i -le 5 ]
+      do
+              echo " iam job 2 $i "
+              i=$(( $i + 1 ))
+              sleep 1
+      done
+
+
+p.sh 
+
+        /home/ec2-user/fifth/p1.sh
+        /home/ec2-user/fifth/p2.sh
+
+
+
+    here the job 2 is runnig after job 1
+
+
+p.sh  
+
+        /home/ec2-user/fifth/p1.sh  &
+        /home/ec2-user/fifth/p2.sh  &
+
+
+
+          here the job 2 job 1  runs simultaneously  
+
+p.sh 
+              echo " both jobs started "
+
+              /home/ec2-user/fifth/p1.sh  &
+              /home/ec2-user/fifth/p2.sh  &
+              wait
+              echo " both jobs runned successfully"
+                    
+
+        here both runs simultaneously and both values updates at same time 
+
+
+
+
+ who
+ who | cut -f1 -d:
+ who | cut -f1 -d" "
+ who | awk '{ print $1 }'
+ who | awk '{ print $1 ":" $3 }'
+ who | awk '{ print $1 " : " $3 }'
+ date | awk '{ print $3 , $2 , $NF }'
+ date | awk 'OFS="/"  { print $3 , $2 , $NF }'
+
+
+
+ ps | awk 'BEGIN { print "now process starts ..." }  { print $1}'
+ cat /etc/passwd  | awk -F: '$3>=1000 { print $1 , $3}'
+ cat /etc/passwd  | awk -F: '$3<=1000 { print $1 , $3}'
+ awk -F: '/bash$/  {print $1 }'  /etc/passwd
+ awk -F:  '{print $1 }'  /etc/passwd | sort
+ awk -F: ' {print $1 }'  /etc/passwd | sort  |  uniq
+   
+   
+   
