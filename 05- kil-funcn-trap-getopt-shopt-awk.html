@@ -1,22 +1,137 @@
 
 
 
+Every command is a program file and it becomes process when we run the program 
+
+ps -aux  ----->  to konow all the processes running in the system 
+
+&  ----->   is used to continue the shell by running the process in backgroud  
+
+ps -aux  |  grep ping    ------>  to filter the process  ping from all the  processes running in the system 
+
+ctrl + c  ------>   can only stop a live process running but cannot stop when its running in background we only stop using    " kill -9 <PID>  "
+  
+  pgrep  < process name or the command >    to know the PID that running in background 
+  
+  ctrl + z  ------>   used to run in background 
+  
+  fg  ------>  used to run the bg process in foreground 
+  
+  kill  -l  ----> to list all the signals of kill command 
+  
+  kill -19  PID     ----->  will stop ( pause ) but dont kill  
+  
+  kill -18  PID  ---->  start the process if its paused using above signal 
+  
+  
+  
+  kanna() 
+  
+  > {
+  > echo  " this is kanna "
+  > }
+  
+  kanna    -------> here it print the output
+  
+  trap kanna  2   -----> when we use ctrl + c it will  respond withe output of function kanna   
+  
+  
 
 
 
+      myadmin.sh 
+  
+  
+                                #!/bin/bash
 
+                              myclear() {
+                                      echo -e '\n ok bye see you next time ...\n'
+                                      rm -f /tmp/pass.txt
+                                      exit 1
+
+                              }
+
+                              trap myclear  2
+
+                              tput setaf 1
+
+                              echo -e  "\t\t\t welcome to server management "
+
+                              tput setaf 7
+
+
+                              echo " select the option to perform operation "
+                              echo " press 1 : to start chat "
+                              echo " press 2 : to manage script "
+                              echo " press 3 : to view calender "
+                              echo " press 4 : to transfer  chat remotely "
+
+
+                              read -p "enter your choice "  option
+
+                              echo $option
+
+                              case $option  in
+
+                                      "1")
+                                              read -p "enter port " port
+                                              nc -l $port  &
+                                              ;;
+
+                                      "2")
+                                              read -p " enter ur password " myp
+                                              echo $myp  > /tmp/pass.txt
+                                              echo " manage script "
+                                              cat /tmp/pass.txt
+                                              read -p "enter ur name " name
+                                              echo $name
+                                              rm -f /tmp/pass.txt
+                                              ;;
+
+                                      "3")
+                                              cal
+                                              ;;
+
+                                      "4")
+                                              read -p " enter ur port " port
+                                              nc -l  $port  > chat2.txt
+                                              ;;
+                                      *)
+                                              echo " choose the appropriate option "
+                              esac
+
+                              exit 0
+
+
+
+  
+  
+  we use while to run a function for multiple times as many required 
+  
+  
+  while [ 2 -eq 2 ]
+  
+  >  do
+  >  echo " hi "
+  > done 
+  
+  
 
 
   page=1
 
- while [ $page -le 5 ]
+ while [ $page -le   5 ]
     >  do 
     > echo $page
     > page=$(( $page + 1 ))
     > done
 
 
-
+  expr 4+1    or  echo $(( 4 + 1 ))
+  
+  
+    page=10
+  
  while [ $page  -le  8 ]
   > do 
   > echo " the value of page at instant is  $page "
@@ -47,22 +162,32 @@ while [ $x -le 5 ]
 
 
 
+pingtest.sh
 
+              while :
+                      do
+                              echo -n " "
+                              sleep 2
+                              if ! ping -c 1  8.8.8.8  >  /dev/null
+                              then
 
-while :
-        do
-                echo -n " "
-                sleep 2
-                if ! ping -c 1  8.8.8.8  >  /dev/null
-                then
+                                      echo " iam down "
 
-                        echo " iam down "
+                              else
+                                      echo " iam connected "
+                              fi
+                      done
 
-                else
-                        echo " iam connected "
-                fi
-        done
-
+  
+  
+  
+  ls  -l  ------>   is used to list all the files in it 
+  
+  ls -a   -i       -------->   
+  
+  ls  --blocksize=1024   ---> used to list the files that are having the file size as 1024 bytes 
+  
+ 
 
   
 
@@ -77,36 +202,38 @@ while :
 
 
 
+  
+myodata.sh
 
-#!/bin/bash
+                #!/bin/bash
 
-name="kanna"
-phone=2345
-age=21
+                name="kanna"
+                phone=2345
+                age=21
 
-myusage() {
-        echo " usage : -p , [ -c  value ] , -n  , -a  "
-}
+                myusage() {
+                        echo " usage : -p , [ -c  value ] , -n  , -a  "
+                }
 
-# read -p "enter your choice :  "   ch
+                # read -p "enter your choice :  "   ch
 
-while getopts  "npac:"  ch
-do
-        case  $ch  in
-                n)      echo $name
-                                ;;
-                p)      echo $phone
-                                ;;
-                a)      echo $age
-                                ;;
-                c)      echo $OPTARG
-                                ;;
-                *)
-                        myusage
-                        break
-        esac
+                while getopts  "npac:"  ch
+                do
+                        case  $ch  in
+                                n)      echo $name
+                                                ;;
+                                p)      echo $phone
+                                                ;;
+                                a)      echo $age
+                                                ;;
+                                c)      echo $OPTARG
+                                                ;;
+                                *)
+                                        myusage
+                                        break
+                        esac
 
-done
+                done
 
 
 
@@ -118,6 +245,15 @@ done
   ./myodata.sh  -c hyd  -a -p -n
 
 
+  
+  sudo su  < username >  ----> is used to login to the user in the same current path 
+  
+  sudo su - < username >  ------>  is used to login to the user with the workdirectory of the user 
+  
+  vim  /etc/ssh/ssh_config    ------->   we edit this file to connect to the root user using ssh 
+  
+  sed -i  's/#PermitRootLogin/permitRootLogin/'   /etc/ssh/ssh_config    ----> it will update the file using  sed  -i  
+  
 
   man shopt
   shopt -s
